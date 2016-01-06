@@ -69,6 +69,15 @@ if (not noarchive) and ('archive-json' in config) and (os.path.exists(config['ar
 if ('draft' in config) and (config['draft'] == True):
     exit(0);
 
+# author extended data -> authorz, works on single author
+# TODO(isoos): make it available for multiple author
+if ('author' in config) and ('author-data' in config) and ('authorz' not in config):
+    authorz = [];
+    adata = config['author-data'];
+    if config['author'] in adata:
+        authorz.append(adata[config['author']]);
+    config['authorz'] = authorz;
+
 # transform the list of lang:url maps into a better suited map
 if 'translation' in config:
     newhreflang = [];
