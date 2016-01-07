@@ -78,6 +78,12 @@ if ('author' in config) and ('author-data' in config) and ('authorz' not in conf
         authorz.append(adata[config['author']]);
     config['authorz'] = authorz;
 
+# convert dates to short format
+if ('published' in config) and ('published-date' not in config):
+    config['published-date'] = str(config['published'])[0:10];
+if ('updated' in config) and ('updated-date' not in config):
+    config['updated-date'] = str(config['updated'])[0:10];
+
 # transform the list of lang:url maps into a better suited map
 if 'translation' in config:
     newhreflang = [];
