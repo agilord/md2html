@@ -78,6 +78,10 @@ if ('author' in config) and ('author-data' in config) and ('authorz' not in conf
         authorz.append(adata[config['author']]);
     config['authorz'] = authorz;
 
+# separate flag to indicate the presence of authorz info
+if 'authorz' in config:
+    config['has-authorz'] = True;
+
 # convert dates to short format
 if ('published' in config) and ('published-date' not in config):
     config['published-date'] = str(config['published'])[0:10];
