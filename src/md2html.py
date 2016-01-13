@@ -39,7 +39,8 @@ if ('data-file' in config) and (config['data-file'].endswith('.json')):
             config[k] = jmap[k];
 
 # set locale (e.g. for date formatter)
-locale.setlocale(locale.LC_ALL, config['lang']);
+if 'locale' in config:
+    locale.setlocale(locale.LC_ALL, config['locale']);
 
 # set draft flag if published ts is in the future
 now = str(datetime.datetime.now()).replace(' ', 'T')[0:-3];
