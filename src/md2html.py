@@ -45,6 +45,10 @@ if ('published' in config):
     if (published > now):
         config['draft'] = True;
 
+# expand single author to multiple authors
+if ('author' in config) and (config['author'] is str):
+    config['author'] = [x.strip() for x in config['author'].split(',')];
+
 # create a subset of properties for the archive DB
 datamap = {};
 for key in ['url', 'lang', 'title', 'draft', 'description', 'summary', 'published', 'updated', 'author', 'tag', 'category']:
@@ -69,8 +73,7 @@ if (not noarchive) and ('archive-json' in config) and (os.path.exists(config['ar
 if ('draft' in config) and (config['draft'] == True):
     exit(0);
 
-# author extended data -> authorz, works on single author
-# TODO(isoos): make it available for multiple author
+# author extended data -> authorz
 if ('author' in config) and ('author-data' in config) and ('authorz' not in config):
     authorz = [];
     adata = config['author-data'];
