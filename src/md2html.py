@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import markdown, pystache, yaml;
-import datetime, json, re, os, shutil, sys;
+import datetime, json, math, re, os, shutil, sys;
 
 config = {};
 inputDir = os.path.dirname(sys.argv[-1]);
@@ -118,6 +118,10 @@ config['content'] = md.convert(mdText);
 config['md-meta'] = md.Meta;
 if ('toc' in config) and (config['toc'] == True):
     config['md-toc'] = md.toc;
+# read length in minutes
+wordCount = len(mdText.split());
+config['word-count'] = wordCount;
+config['read-length'] = math.ceil(wordCount / 225);
 
 if (not 'output-file' in config):
     if config['url'].endswith('.html'):
