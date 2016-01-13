@@ -87,9 +87,15 @@ if 'authorz' in config:
 
 # convert dates to short format
 if ('published' in config) and ('published-date' not in config):
-    config['published-date'] = str(config['published'])[0:10];
+    if 'short-date' in config:
+        config['published-date'] = config['published'].strftime(config['short-date']);
+    else:
+        config['published-date'] = str(config['published'])[0:10];
 if ('updated' in config) and ('updated-date' not in config):
-    config['updated-date'] = str(config['updated'])[0:10];
+    if 'short-date' in config:
+        config['updated-date'] = config['updated'].strftime(config['short-date']);
+    else:
+        config['updated-date'] = str(config['updated'])[0:10];
 
 # transform the list of lang:url maps into a better suited map
 if 'translation' in config:
