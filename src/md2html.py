@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import markdown, pystache, yaml;
-import datetime, json, math, re, os, shutil, sys;
+import datetime, json, locale, math, re, os, shutil, sys;
 
 config = {};
 inputDir = os.path.dirname(sys.argv[-1]);
@@ -37,6 +37,9 @@ if ('data-file' in config) and (config['data-file'].endswith('.json')):
         jmap = json.load(f);
         for k in jmap:
             config[k] = jmap[k];
+
+# set locale (e.g. for date formatter)
+locale.setlocale(locale.LC_ALL, config['lang']);
 
 # set draft flag if published ts is in the future
 now = str(datetime.datetime.now()).replace(' ', 'T')[0:-3];
